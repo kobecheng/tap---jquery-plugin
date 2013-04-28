@@ -1,0 +1,7 @@
+{
+  "name": "util",
+  "root": "/assets/vendor/Zonda",
+  "output": {
+    "util.js": "."
+  }
+}

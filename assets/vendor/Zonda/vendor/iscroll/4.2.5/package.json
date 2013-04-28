@@ -1,0 +1,8 @@
+{
+  "name": "iscroll",
+  "root": "/assets/vendor/Zonda/vendor",
+  "version": "4.2.5",
+  "output": {
+    "iscroll.js": "."
+  }
+}

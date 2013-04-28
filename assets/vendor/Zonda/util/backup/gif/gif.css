@@ -1,0 +1,29 @@
+/**
+ * 旋转AJAX加载提示GIF
+ */
+#ajax-loader {
+    width: 76px;
+    height: 30px;
+
+    display: none;
+
+    padding-left: 35px;
+    margin-left: -35px;
+
+    background: #545454 url('/Zonda/images/load.gif') no-repeat;
+    background-position: 7px 7px;
+
+    position: fixed;
+    top: 15%;
+    left: 50%;
+
+    z-index: 1000;
+
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+
+    border-radius: 5px;
+
+    line-height: 30px;
+    color: #fff;
+    font-size: 14px;
+}

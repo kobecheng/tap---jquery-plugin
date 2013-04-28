@@ -1,0 +1,42 @@
+@charset "utf-8";
+/**
+*IE 各版本Hack示例 
+*
+* IE6 only :
+*   #someSelector { _color:green; }
+*
+* IE7 only :
+*   *:first-child+html #someSelector {
+*   }
+*
+* IE8 only :
+@media \0screen {
+     #note {
+         width:450px;
+     }
+
+     #login, #regist, #about, #registLink, #loginLink {
+         display:none;
+     }
+}
+
+* IE9 only : 
+*   :root #someSelector {
+*       color:blue;
+*   }
+*/
+
+/* 双倍Margin BUG */
+#big-slide .slide-page li,
+#main .sub .side-bar,
+#header .search button {
+    _display: inline;
+}
+
+#hot .hot-exhibitors .hot-exhibitors-title h4{_margin-top: 15px;_margin-bottom: 0px;}
+
+#hot .hot-list .hot-list-list{_margin-top: 27px;}
+#hot .hot-list .hot-list-title h4 {_margin-top: 3px;}
+
+#hot .hot-exhibitors{_top: 0; _right: 0;}
+

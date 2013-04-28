@@ -1,0 +1,21 @@
+{
+  "name": "Zonda",
+  "version": "0.2.0",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+    "seajs": "2.0.0b3",
+    "colors": "0.6.0-1"
+  },
+  "scripts": {
+    "test": "tool/setup.sh"
+  },
+  "devDependencies": {
+    "sinon": "1.6.0",
+    "grunt": "0.4.1",
+    "grunt-cli": "0.1.6",
+    "grunt-contrib-connect": "git://github.com/gruntjs/grunt-contrib-connect.git",
+    "grunt-contrib-qunit": "git://github.com/gruntjs/grunt-contrib-qunit.git"
+  }
+}

@@ -1,0 +1,58 @@
+// ie.bootstrap.less
+// -----------------
+// 为ie6做bootstrap支持
+
+// 栅格系统支持
+.span1,
+.span2,
+.span3,
+.span4,
+.span5,
+.span6,
+.span7,
+.span8,
+.span9,
+.span10,
+.span11,
+.span12,
+.span13,
+.span14,
+.span15,
+.span16,
+.span17,
+.span18,
+.span19,
+.span20 {
+    float: left;
+    margin-left: @gridGutterWidth;
+    _display: inline;
+}
+
+#grid {
+
+  .input(@gridColumnWidth, @gridGutterWidth) {
+
+    .spanX (@index) when (@index > 0) {
+      (~"input.span@{index}, textarea.span@{index}, .uneditable-input.span@{index}") { .span(@index); }
+      .spanX(@index - 1);
+    }
+    .spanX (0) {}
+
+    .span(@columns) {
+      width: ((@gridColumnWidth) * @columns) + (@gridGutterWidth * (@columns - 1)) - 10;
+      // IE6 bug
+      _width: ((@gridColumnWidth) * @columns) + (@gridGutterWidth * (@columns - 1));
+    }
+
+    input,
+    textarea,
+    .uneditable-input {
+      margin-left: 0; // override margin-left from core grid system
+    }
+
+    // generate .spanX
+    .spanX (@gridColumns);
+
+    }
+
+}
