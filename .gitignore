@@ -1,0 +1,12 @@
+*.swo
+*.swp
+.settings
+.buildpath
+.project
+dhumbs.db
+/app/config/parameters.yml
+/app/config/public_config.php
+/app/cache/*
+/app/logs/*
+
+!.gitkeep

@@ -1,6 +1,6 @@
 # Layout of this APP
 # ------------------
-# Three parts
+# Require plugins
 #
 define ( require, exports, module ) ->
   $ = require "../plugins/tap-noclick"
@@ -9,7 +9,7 @@ define ( require, exports, module ) ->
     $("body").append """
       <a id="touch" href="http://g.cn" class="test">test</a>
     """
-
+    ###
     touchStart = (event) ->
       target = if window.event then window.event.srcElement else event.target
       $(target)
@@ -18,12 +18,17 @@ define ( require, exports, module ) ->
 
     touchEnd = (event) ->
       target = if window.event then window.event.srcElement else event.target
+      console.log target
       $(target)
         .removeClass("touch")
-        .addClass("end")
+        .addClass("test")
 
     setting =
       startCall: touchStart
       endCall: touchEnd
+    ###
 
-    $("#touch").tapNoClick setting
+    endCallback = (event) ->
+      alert 1
+
+    $("#touch").tap endCallback

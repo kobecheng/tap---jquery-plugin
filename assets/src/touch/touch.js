@@ -4,25 +4,31 @@ define(function(require, exports, module) {
 
   $ = require("../plugins/tap-noclick");
   return $(function() {
-    var setting, touchEnd, touchStart;
+    var endCallback;
 
     $("body").append("<a id=\"touch\" href=\"http://g.cn\" class=\"test\">test</a>");
-    touchStart = function(event) {
-      var target;
-
-      target = window.event ? window.event.srcElement : event.target;
-      return $(target).removeClass("test").addClass("touch");
-    };
-    touchEnd = function(event) {
-      var target;
-
-      target = window.event ? window.event.srcElement : event.target;
-      return $(target).removeClass("touch").addClass("end");
-    };
-    setting = {
-      startCall: touchStart,
+    /*
+    touchStart = (event) ->
+      target = if window.event then window.event.srcElement else event.target
+      $(target)
+        .removeClass("test")
+        .addClass("touch")
+    
+    touchEnd = (event) ->
+      target = if window.event then window.event.srcElement else event.target
+      console.log target
+      $(target)
+        .removeClass("touch")
+        .addClass("test")
+    
+    setting =
+      startCall: touchStart
       endCall: touchEnd
+    */
+
+    endCallback = function(event) {
+      return alert(1);
     };
-    return $("#touch").tapNoClick(setting);
+    return $("#touch").tap(endCallback);
   });
 });
