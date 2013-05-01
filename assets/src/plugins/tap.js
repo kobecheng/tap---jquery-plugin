@@ -32,10 +32,9 @@ define(function(require, exports, module) {
       }
     };
     getTarget = function(e) {
-      var el;
+      var el, touch;
 
       el = e.target;
-      console.log(el);
       if (el) {
         if (el.nodeType === 3) {
           return el.parentNode;
@@ -43,11 +42,8 @@ define(function(require, exports, module) {
           return el;
         }
       }
-      /*
-      touch = e.targetTouches[0]
-      return getTargetByCoords(touch.clientX,touch.clientY)
-      */
-
+      touch = e.targetTouches[0];
+      return getTargetByCoords(touch.clientX, touch.clientY);
     };
     onStart = function(e) {
       var target, touch;
@@ -56,16 +52,23 @@ define(function(require, exports, module) {
       if (!target) {
         return;
       }
+      console.log(events.move);
       $(target).addClass(activeClass);
       startX = e.clientX;
       startY = e.clientY;
       if (!startX || !startY) {
+        /*
+         touch = e.originalEvent.changedTouches[0]
+         startX = touch.clientX
+         startY = touch.clientY
+        */
+
         touch = e.targetTouches[0];
         startX = e.clientX;
         startY = e.clientY;
       }
       startTarget = target;
-      return elBound = noScroll ? target.getBoundingClientRect : null;
+      return elBound = noScroll ? target.getBoundingClientRect() : null;
     };
     onMove = function(e) {
       var target, touch, x, y;
@@ -73,6 +76,7 @@ define(function(require, exports, module) {
       if (!startTarget) {
         return;
       }
+      console.log(noScroll);
       if (noScroll) {
         e.preventDefault();
       }
@@ -106,16 +110,26 @@ define(function(require, exports, module) {
         return;
       }
       target = e.target;
+      console.log(this);
       $(target).removeClass(activeClass);
       return endCallback();
     };
+    /*
+    @on "click", (event) ->
+      do event.stopPropagation
+      do event.preventDefault
+    @on events.start,onStart
+    @on events.move,onMove
+    @on events.end,onEnd
+    */
+
     this.on("click", function(event) {
       event.stopPropagation();
       return event.preventDefault();
     });
-    this.on(events.start, onStart);
-    this.on(events.move, onMove);
-    return this.on(events.end, onEnd);
+    $(this)[0].addEventListener(events.start, onStart, false);
+    $(this)[0].addEventListener(events.move, onMove, false);
+    return $(this)[0].addEventListener(events.end, onEnd, false);
   };
   return module.exports = $;
 });

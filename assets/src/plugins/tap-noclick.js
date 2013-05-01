@@ -5,6 +5,7 @@ define(function(require, exports, module) {
   $ = require("jquery");
   $.fn.tapNoClick = function(setting) {
     this.on("touchstart", function(event) {
+      console.log(event.targetTouchse[0]);
       return setting.startCall();
     });
     this.on("touchend", function(event) {

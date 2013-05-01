@@ -4,12 +4,22 @@ define(function(require, exports, module) {
 
   $ = require("../plugins/tap");
   return $(function() {
-    var endCallback;
+    var endcall;
 
     $("body").append("<a id=\"touch\" href=\"http://g.cn\" class=\"test\">test</a>");
-    endCallback = function(event) {
-      return alert(1);
+    /*
+    setting =
+      startCall:  ->
+        console.log 1
+      endCall: ->
+        console.log 2
+    
+    $("#touch").tapNoClick setting
+    */
+
+    endcall = function() {
+      return alert('end');
     };
-    return $("#touch").tap(endCallback);
+    return $('#touch').tap(endcall);
   });
 });

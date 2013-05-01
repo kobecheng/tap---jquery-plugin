@@ -7,6 +7,7 @@ define ( require, exports, module ) ->
   $.fn.tapNoClick = (setting) ->
 
     @on "touchstart", (event) ->
+      console.log event.targetTouchse[0]
       do setting.startCall
 
     @on "touchend", (event) ->

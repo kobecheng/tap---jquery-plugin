@@ -49,18 +49,16 @@ define ( require, exports, module ) ->
 
     getTarget = (e) ->
       el = e.target
-      console.log el
+      #console.log el
       if el
         if el.nodeType is 3
           return el.parentNode
         else
           return el
-        
-      ###
       touch = e.targetTouches[0]
       return getTargetByCoords(touch.clientX,touch.clientY)
-      ###
-#END 工具函数
+
+     #END 工具函数
 
 
 
@@ -71,19 +69,27 @@ define ( require, exports, module ) ->
     onStart= (e) ->
       target = getTarget e
       return if not target
-      
+      console.log events.move  
       $(target).addClass activeClass
 
       startX = e.clientX
       startY = e.clientY
 
       if not startX or not startY
-         touch = e.targetTouches[0]
-         startX = e.clientX
-         startY = e.clientY
+        ###
+         touch = e.originalEvent.changedTouches[0]
+         startX = touch.clientX
+         startY = touch.clientY
+         ###
+        touch = e.targetTouches[0]
+        startX = e.clientX
+        startY = e.clientY
 
       startTarget = target
-      elBound = if noScroll then target.getBoundingClientRect else null
+      #console.log noScroll
+      elBound = if noScroll then do target.getBoundingClientRect else null
+      #console.log elBound.left
+
     #END onStart
 
 
@@ -91,6 +97,7 @@ define ( require, exports, module ) ->
     onMove= (e) ->
       return if not startTarget#没有触摸,就没有startTarget
 
+      console.log noScroll
       do e.preventDefault if noScroll
       
       target = e.target
@@ -118,18 +125,29 @@ define ( require, exports, module ) ->
       return if not startTarget#没有触摸,就没有startTarget
 
       target = e.target
+      console.log this
       $(target).removeClass activeClass
 
       do endCallback
     #END onEnd
 
     #绑定事件
+    ###
     @on "click", (event) ->
       do event.stopPropagation
       do event.preventDefault
     @on events.start,onStart
     @on events.move,onMove
     @on events.end,onEnd
+    ###
+    @on "click", (event) ->
+      do event.stopPropagation
+      do event.preventDefault
+
+    $(@)[0].addEventListener(events.start, onStart,false)
+    $(@)[0].addEventListener(events.move, onMove, false)
+    $(@)[0].addEventListener(events.end, onEnd, false)
+
     #END 绑定事件
 
   module.exports = $
