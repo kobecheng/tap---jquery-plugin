@@ -21,18 +21,18 @@ define ( require, exports, module ) ->
   
   $.fn.tap= (endCallback) ->
 
-    startTarget
-    prevTarget
-    startX
-    startY
-    moveOut  #是否移出元素外
-    elBound   #元素的左，上，右和下分别相对浏览器视窗的位置
+    startTarget = ''
+    prevTarget = ''
+    startX = ''
+    startY = ''
+    moveOut = false  #是否移出元素外
+    elBound = ''   #元素的左，上，右和下分别相对浏览器视窗的位置
     noScroll = true
     boundMargin = 50
     activeClass = "tap-active"
 
-    supportTouch = 'ontouchend' in document
-    events = 
+    supportTouch = true#'ontouchend' in document
+    events =
       start: if supportTouch then 'touchstart' else 'mousedown'
       move: if supportTouch then 'touchemove' else 'mousemove'
       end: if supportTouch then 'touchend' else 'mouseup'
@@ -42,15 +42,24 @@ define ( require, exports, module ) ->
 #两个工具函数
     getTargetByCoords = (x,y) ->
       el = document.elementFromPoint(x,y)
-      return el.parentNode if el.nodeType == 3
-      return el
+      if el.nodeType is 3
+        return el.parentNode
+      else
+        return el
 
     getTarget = (e) ->
       el = e.target
-      if el and el.nodeType == 3
-        return el.parentNode
+      console.log el
+      if el
+        if el.nodeType is 3
+          return el.parentNode
+        else
+          return el
+        
+      ###
       touch = e.targetTouches[0]
       return getTargetByCoords(touch.clientX,touch.clientY)
+      ###
 #END 工具函数
 
 
@@ -113,7 +122,6 @@ define ( require, exports, module ) ->
 
       do endCallback
     #END onEnd
-
 
     #绑定事件
     @on "click", (event) ->

@@ -968,7 +968,4 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .invisible{visibility:hidden;}
 .affix{position:fixed;}
 @media (min-width:1200px){}@media (max-width:980px){}@media (min-width:768px) and (max-width:980px){}@media (max-width:767px){}@media (max-width:480px){}.title{background-image:url("/assets/ui/images/all-title.png");width:960px;height:42px;}
-#touch{width:50px;height:50px;font-size:250px;}
-.ui-hover{background-color:red;}
-.touch{background-color:red;}
-.end{background-color:black;}
+#touch{width:550px;height:550px;display:inline-block;border:2px solid #aaa;vertical-align:middle;text-decoration:none;background-color:yellow;font-size:12px;margin:10px 10px;}#touch .tap-active{background-color:red;}
