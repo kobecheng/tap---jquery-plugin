@@ -1,28 +1,20 @@
 # Layout of this APP
 # ------------------
-# Require plugins
+# body append
+#
+# Require tap---jquery plugins
 #
 define ( require, exports, module ) ->
-  #$ = require "../plugins/tap-noclick"
-  
   $ = require "../plugins/tap"
-
 
   $ ->
     $("body").append """
       <a id="touch" href="http://g.cn" class="test">test</a>
     """
-    ###
-    setting =
-      startCall:  ->
-        console.log 1
-      endCall: ->
-        console.log 2
-
-    $("#touch").tapNoClick setting
-    ###
+    # define tap-jquery plugin 's endcallback'
     endcall = ->
       alert 'end'
 
+    # 模块调用
     $('#touch').tap endcall
 

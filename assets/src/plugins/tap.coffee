@@ -33,7 +33,7 @@ define ( require, exports, module ) ->
     activeClass = "tap-active"
 
     # 判断是否支持touch,如果不支持touch就用mouse相关事件代替
-    supportTouch = 'ontouchend' in document
+    supportTouch = true # 'ontouchend' in document.documentElement
     events =
       start: if supportTouch then 'touchstart' else 'mousedown'
       move: if supportTouch then 'touchmove' else 'mousemove'
@@ -71,8 +71,10 @@ define ( require, exports, module ) ->
 # event handler------start,move,end
 
     # begin onStart
-    onStart= (e) ->
+    onStart = (e) ->
       target = getTarget e
+      console.log this
+      console.log events
 
       return if not target
 
@@ -95,7 +97,7 @@ define ( require, exports, module ) ->
 
 
     # begin onMove
-    onMove= (e) ->
+    onMove = (e) ->
       return if not startTarget # 没有触摸,就没有startTarget
 
       do e.preventDefault if noScroll
@@ -137,16 +139,16 @@ define ( require, exports, module ) ->
 # END event handler------start,move,end
 
     # begin  绑定事件
+    #
     # no-click
     @on "click", (event) ->
-      do event.stopPropagation
       do event.preventDefault
+      do event.stopPropagation
 
     # 监听start,move,end
     $(@)[0].addEventListener events.start, onStart, false
     $(@)[0].addEventListener events.move, onMove, false
     $(@)[0].addEventListener events.end, onEnd, false
-
     # END 绑定事件
 
   module.exports = $
